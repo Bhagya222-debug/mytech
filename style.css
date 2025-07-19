@@ -345,13 +345,21 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    /* Prevent horizontal overflow */
+    max-width: 100%;
+    overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .login-logo {
-    width: 20px;
+    width: 60px; /* 20px is too small — use 60px or adjust with media query */
     height: auto;
+    max-width: 100%;
+    object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: block;
 }
 
 .logo-container h2 {
