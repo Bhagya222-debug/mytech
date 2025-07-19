@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TellByB - Grade 10 English Grammar - Reported Speech LMS</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Letters Background -->
+    <div class="letter-animation letter-1">G</div>
+    <div class="letter-animation letter-2">R</div>
+    <div class="letter-animation letter-3">A</div>
+    <div class="letter-animation letter-4">M</div>
+    <div class="letter-animation letter-5">M</div>
+    <div class="letter-animation letter-6">A</div>
+    <div class="letter-animation letter-7">R</div>
+    <div class="letter-animation letter-8">E</div>
+    <div class="letter-animation letter-9">N</div>
+    <div class="letter-animation letter-10">G</div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal active">
+        <div class="modal-content">
+            <div class="logo-container">
+                <img src="attached_assets/ChatGPT Image Jul 19, 2025, 02_56_54 PM_1752917380827.png" alt="TellByB Logo" class="login-logo">
+                <h2>Welcome to TellByB</h2>
+            </div>
+            <img src="attached_assets/ChatGPT Image Jul 19, 2025, 02_56_54 PM_1752917380827.png" alt="TellByB Main Logo" class="modal-background-image">
+            <p class="tagline">Learn. Express. Grow.</p>
+            <p>Please enter your details to start learning!</p>
+            <form id="loginForm">
+                <input type="text" id="studentName" placeholder="Enter your name" required>
+                <select id="studentGrade" required>
+                    <option value="">Select Grade</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                </select>
+                <button type="submit">Start Learning</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="hidden">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="header-logo">
+                    <img src="attached_assets/ChatGPT Image Jul 19, 2025, 02_56_54 PM_1752917380827.png" alt="TellByB Logo" class="header-logo-img">
+                    <h1>TellByB</h1>
+                </div>
+                <div class="user-info">
+                    <span id="welcomeUser"></span>
+                    <span id="userScore">Score: 0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Virtual Tour Map -->
+        <div id="virtualTour" class="tour-overlay active">
+            <div class="tour-map-container">
+                <div class="map-header">
+                    <div class="map-title">
+                        <h1>🗺️ Your Learning Adventure Map</h1>
+                        <p>Click on any location to explore and start your journey!</p>
+                    </div>
+                </div>
+                
+                <div class="adventure-map">
+                    <!-- Start Point -->
+                    <div class="map-location start-point" onclick="exploreLocation('start')">
+                        <div class="location-icon">🚀</div>
+                        <div class="location-info">
+                            <h3>Start Here!</h3>
+                            <p>Begin your adventure</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Theory Castle -->
+                    <div class="map-location theory-castle" onclick="exploreLocation('theory')">
+                        <div class="location-icon">🏰</div>
+                        <div class="location-info">
+                            <h3>Theory Castle</h3>
+                            <p>📚 Learn the fundamentals</p>
+                            <div class="location-features">
+                                <span>📝 Interactive Lessons</span>
+                                <span>🎬 Educational Videos</span>
+                                <span>💡 Smart Examples</span>
+                            </div>
+                        </div>
+                        <div class="map-path path-to-theory"></div>
+                    </div>
+                    
+                    <!-- Practice Forest -->
+                    <div class="map-location practice-forest" onclick="exploreLocation('practice')">
+                        <div class="location-icon">🌲</div>
+                        <div class="location-info">
+                            <h3>Practice Forest</h3>
+                            <p>✏️ Sharpen your skills</p>
+                            <div class="location-features">
+                                <span>📝 5 Exercise Questions</span>
+                                <span>✅ Instant Feedback</span>
+                                <span>🎉 Celebration Effects</span>
+                            </div>
+                        </div>
+                        <div class="map-path path-to-practice"></div>
+                    </div>
+                    
+                    <!-- Game Arena -->
+                    <div class="map-location game-arena" onclick="exploreLocation('game')">
+                        <div class="location-icon">🎮</div>
+                        <div class="location-info">
+                            <h3>Game Arena</h3>
+                            <p>🎯 Fun learning experience</p>
+                            <div class="location-features">
+                                <span>🎯 10 Game Questions</span>
+                                <span>🏆 Score Points</span>
+                                <span>🎪 Character Conversations</span>
+                            </div>
+                        </div>
+                        <div class="map-path path-to-game"></div>
+                    </div>
+                    
+                    <!-- Leaderboard Summit -->
+                    <div class="map-location leaderboard-summit" onclick="exploreLocation('leaderboard')">
+                        <div class="location-icon">🏔️</div>
+                        <div class="location-info">
+                            <h3>Achievement Summit</h3>
+                            <p>🏆 Compete and achieve</p>
+                            <div class="location-features">
+                                <span>🥇 Top Performers</span>
+                                <span>🎖️ Achievement Badges</span>
+                                <span>📊 Your Progress</span>
+                            </div>
+                        </div>
+                        <div class="map-path path-to-leaderboard"></div>
+                    </div>
+                    
+                    <!-- Treasure Chest (Completion) -->
+                    <div class="map-location treasure-chest hidden" id="treasureChest">
+                        <div class="location-icon">💎</div>
+                        <div class="location-info">
+                            <h3>Treasure Unlocked!</h3>
+                            <p>🎊 Master of Grammar</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-footer">
+                    <button onclick="startLearning()" class="start-adventure-btn">
+                        🎯 Start Your Adventure!
+                    </button>
+                    <div class="map-legend">
+                        <span>🏰 Learn</span>
+                        <span>🌲 Practice</span>
+                        <span>🎮 Play</span>
+                        <span>🏔️ Compete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+            <button class="nav-btn active" onclick="showSection('theory')">
+                <i class="fas fa-book"></i> Theory
+            </button>
+            <button class="nav-btn" onclick="showSection('practice')">
+                <i class="fas fa-pencil-alt"></i> Practice
+            </button>
+            <button class="nav-btn" onclick="showSection('game')">
+                <i class="fas fa-gamepad"></i> Game
+            </button>
+            <button class="nav-btn" onclick="showSection('leaderboard')">
+                <i class="fas fa-trophy"></i> Leaderboard
+            </button>
+        </nav>
+
+        <!-- Theory Section -->
+        <section id="theory" class="content-section active">
+            <div class="lesson-container">
+                <h2>Understanding Reported Speech</h2>
+                
+                <!-- Introduction Video Section -->
+                <div class="video-section">
+                    <h3><i class="fas fa-play-circle"></i> Introduction Video</h3>
+                    <div class="video-container">
+                        <video width="100%" height="315" controls>
+                            <source src="attached_assets/reported-speech-video_1752924401794.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <p class="video-description">Watch this video to understand the basics of reported speech before diving into the examples below.</p>
+                </div>
+
+                <!-- Simple Explanation -->
+                <div class="explanation-section">
+                    <h3><i class="fas fa-book-reader"></i> What is Reported Speech?</h3>
+                    <div class="simple-explanation">
+                        <p><strong>Reported Speech</strong> (also called Indirect Speech) is when we tell someone what another person said, but we don't use their exact words.</p>
+                        <p>When we change from direct speech to reported speech, we need to make some changes:</p>
+                        <ul class="explanation-list">
+                            <li><i class="fas fa-clock"></i> <strong>Tense Changes:</strong> Past becomes past perfect, present becomes past</li>
+                            <li><i class="fas fa-user"></i> <strong>Pronoun Changes:</strong> "I" becomes "he/she", "you" becomes "I/we"</li>
+                            <li><i class="fas fa-calendar"></i> <strong>Time/Place Changes:</strong> "today" becomes "that day", "here" becomes "there"</li>
+                            <li><i class="fas fa-quote-left"></i> <strong>Remove Quotation Marks:</strong> Add "that" after the reporting verb</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Animated Interactive Example -->
+                <div class="animated-example-section">
+                    <h3><i class="fas fa-magic"></i> Interactive Animated Example</h3>
+                    <div class="animation-container">
+                        <div class="animation-stage">
+                            <div class="character-speaking" id="speaker">
+                                <div class="character-avatar">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%234A90E2'/%3E%3Ccircle cx='40' cy='40' r='5' fill='white'/%3E%3Ccircle cx='60' cy='40' r='5' fill='white'/%3E%3Cpath d='M35 60 Q50 70 65 60' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Sarah">
+                                    <p class="character-name">Sarah</p>
+                                </div>
+                                <div class="speech-bubble-direct" id="directBubble">
+                                    <p id="directText">"I am studying English grammar."</p>
+                                </div>
+                            </div>
+                            
+                            <div class="transformation-arrow" id="transformArrow">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Transform to Reported Speech</span>
+                            </div>
+                            
+                            <div class="character-reporting" id="reporter">
+                                <div class="character-avatar">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23E74C3C'/%3E%3Ccircle cx='40' cy='40' r='5' fill='white'/%3E%3Ccircle cx='60' cy='40' r='5' fill='white'/%3E%3Cpath d='M35 60 Q50 70 65 60' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Teacher">
+                                    <p class="character-name">Teacher</p>
+                                </div>
+                                <div class="speech-bubble-reported" id="reportedBubble">
+                                    <p id="reportedText">Sarah said that she was studying English grammar.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="animation-controls">
+                            <button class="animation-btn" onclick="playAnimation()">
+                                <i class="fas fa-play"></i> Play Animation
+                            </button>
+                            <button class="animation-btn" onclick="resetAnimation()">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                        
+                        <div class="transformation-explanation" id="transformationSteps">
+                            <h4>Step-by-Step Transformation:</h4>
+                            <div class="step-item">
+                                <span class="step-number">1</span>
+                                <span class="step-text">Remove quotation marks</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Add "that" after "said"</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Change "I" to "she"</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">4</span>
+                                <span class="step-text">Change "am" to "was"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Original Examples with Enhanced Styling -->
+                <div class="lesson-content">
+                    <h3><i class="fas fa-examples"></i> More Examples</h3>
+                    <p class="intro">Can you remember what Uncle Angelo said?</p>
+                    
+                    <div class="example-box enhanced-example">
+                        <h4>Example 1: Present to Past</h4>
+                        <div class="direct-speech">
+                            <i class="fas fa-quote-left"></i>
+                            <strong>Direct Speech:</strong> Uncle Angelo said, "It looks very nice"
+                        </div>
+                        <div class="arrow animated-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="reported-speech">
+                            <i class="fas fa-comment"></i>
+                            <strong>Reported Speech:</strong> Uncle Angelo said that it looked very nice.
+                        </div>
+                        <div class="changes-highlight">
+                            <span class="change-item">"looks" → "looked"</span>
+                            <span class="change-item">Added "that"</span>
+                        </div>
+                    </div>
+
+                    <div class="example-box enhanced-example">
+                        <h4>Example 2: Pronoun Changes</h4>
+                        <div class="direct-speech">
+                            <i class="fas fa-quote-left"></i>
+                            <strong>Direct Speech:</strong> "He is my new boss", Uncle Angelo said.
+                        </div>
+                        <div class="arrow animated-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="reported-speech">
+                            <i class="fas fa-comment"></i>
+                            <strong>Reported Speech:</strong> Uncle Angelo said that he was his new boss.
+                        </div>
+                        <div class="changes-highlight">
+                            <span class="change-item">"is" → "was"</span>
+                            <span class="change-item">"my" → "his"</span>
+                        </div>
+                    </div>
+
+                    <div class="rule-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Grammar Rule:</strong> Present tense in direct speech changes to past tense in reported speech.
+                    </div>
+
+                    <div class="example-box enhanced-example">
+                        <h4>Example 3: Past to Past Perfect</h4>
+                        <div class="direct-speech">
+                            <i class="fas fa-quote-left"></i>
+                            <strong>Direct Speech:</strong> Uncle Angelo said, "I decided to shave it off"
+                        </div>
+                        <div class="arrow animated-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="reported-speech">
+                            <i class="fas fa-comment"></i>
+                            <strong>Reported Speech:</strong> Uncle Angelo said that he had decided to shave it off.
+                        </div>
+                        <div class="changes-highlight">
+                            <span class="change-item">"decided" → "had decided"</span>
+                            <span class="change-item">"I" → "he"</span>
+                        </div>
+                    </div>
+
+                    <div class="rule-box">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Grammar Rule:</strong> Past tense in direct speech changes to past perfect tense in reported speech.
+                    </div>
+                </div>
+
+                <!-- Quick Reference Table -->
+                <div class="quick-reference">
+                    <h3><i class="fas fa-table"></i> Quick Reference: Tense Changes</h3>
+                    <div class="reference-table">
+                        <div class="table-header">
+                            <div class="header-cell">Direct Speech</div>
+                            <div class="header-cell">Reported Speech</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Present Simple (am/is/are)</div>
+                            <div class="table-cell">Past Simple (was/were)</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Past Simple (went/did)</div>
+                            <div class="table-cell">Past Perfect (had gone/had done)</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Present Perfect (have/has done)</div>
+                            <div class="table-cell">Past Perfect (had done)</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Will (future)</div>
+                            <div class="table-cell">Would</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Can</div>
+                            <div class="table-cell">Could</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">May</div>
+                            <div class="table-cell">Might</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practice" class="content-section">
+            <div class="practice-container">
+                <h2>Practice Exercises</h2>
+                <p>Write the following in reported speech:</p>
+                
+                <div class="exercise-list">
+                    <div class="exercise-item">
+                        <p><strong>1.</strong> Niki said, "I was hungry."</p>
+                        <input type="text" id="answer1" placeholder="Your answer...">
+                        <button onclick="checkAnswer(1, 'Niki said that she had been hungry.')">Check</button>
+                        <div class="feedback" id="feedback1"></div>
+                    </div>
+
+                    <div class="exercise-item">
+                        <p><strong>2.</strong> Mother said, "I'm busy."</p>
+                        <input type="text" id="answer2" placeholder="Your answer...">
+                        <button onclick="checkAnswer(2, 'Mother said that she was busy.')">Check</button>
+                        <div class="feedback" id="feedback2"></div>
+                    </div>
+
+                    <div class="exercise-item">
+                        <p><strong>3.</strong> Rakith said, "We are happy."</p>
+                        <input type="text" id="answer3" placeholder="Your answer...">
+                        <button onclick="checkAnswer(3, 'Rakith said that they were happy.')">Check</button>
+                        <div class="feedback" id="feedback3"></div>
+                    </div>
+
+                    <div class="exercise-item">
+                        <p><strong>4.</strong> Mr. Munaweera said, "The children played well."</p>
+                        <input type="text" id="answer4" placeholder="Your answer...">
+                        <button onclick="checkAnswer(4, 'Mr. Munaweera said that the children had played well.')">Check</button>
+                        <div class="feedback" id="feedback4"></div>
+                    </div>
+
+                    <div class="exercise-item">
+                        <p><strong>5.</strong> They said, "We lived here for 10 years."</p>
+                        <input type="text" id="answer5" placeholder="Your answer...">
+                        <button onclick="checkAnswer(5, 'They said that they had lived there for 10 years.')">Check</button>
+                        <div class="feedback" id="feedback5"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section id="game" class="content-section">
+            <div class="game-container">
+                <h2>Conversation Game</h2>
+                <div class="game-scenario">
+                    <div class="character">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%234A90E2'/%3E%3Ccircle cx='40' cy='40' r='5' fill='white'/%3E%3Ccircle cx='60' cy='40' r='5' fill='white'/%3E%3Cpath d='M35 60 Q50 70 65 60' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Character">
+                        <p>Meet Sarah!</p>
+                    </div>
+                    <div class="conversation-box">
+                        <div class="speech-bubble" id="speechBubble">
+                            <p id="directSpeech">Sarah says: "I am studying for my exam."</p>
+                        </div>
+                        <div class="game-question">
+                            <p>How would you report what Sarah said?</p>
+                            <div class="options">
+                                <button class="option-btn" onclick="selectGameAnswer('A', this)">A) Sarah said that she is studying for her exam.</button>
+                                <button class="option-btn" onclick="selectGameAnswer('B', this)">B) Sarah said that she was studying for her exam.</button>
+                                <button class="option-btn" onclick="selectGameAnswer('C', this)">C) Sarah said that she will study for her exam.</button>
+                            </div>
+                            <div class="game-feedback" id="gameFeedback"></div>
+                            <button id="nextQuestion" class="hidden" onclick="nextGameQuestion()">Next Question</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-score">
+                    <p>Game Score: <span id="gameScore">0</span>/10</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Section -->
+        <section id="leaderboard" class="content-section">
+            <div class="leaderboard-container">
+                <h2><i class="fas fa-trophy"></i> Leaderboard</h2>
+                <div class="leaderboard-list" id="leaderboardList">
+                    <!-- Leaderboard entries will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
