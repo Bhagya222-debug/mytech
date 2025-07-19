@@ -9,7 +9,7 @@ body {
     background: linear-gradient(135deg, #87ceeb, #b0e0e6, #add8e6, #e0f6ff, #f0f8ff, #e6f3ff);
     min-height: 100vh;
     color: #333;
-    position: relative;
+    position: fixed;
     overflow-x: hidden;
 }
 
